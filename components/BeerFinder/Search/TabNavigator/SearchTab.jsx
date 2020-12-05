@@ -1,11 +1,58 @@
-import React from "react";
-import {StyleSheet, View} from "react-native";
+import React, {useState} from "react";
+import {Keyboard, StyleSheet, Text, View} from "react-native";
+import {Container, Content} from "native-base";
+import axios from "axios";
+
+import SearchBody from "../SearchBody";
+import SearchHeader from "../SearchHeader";
 
 const SearchTab = () => {
-    return (
-        <View style={styles.container}>
+    const [searchBeer, setSearchBeer] = useState("");
+    const [beerData, setBeerData] = useState({});
+    const [beerFound, setBeerFound] = useState(false);
 
-        </View>
+    function beerSearch() {
+        Keyboard.dismiss();
+        const beerName = searchBeer.toLowerCase();
+        const query = "https://sandbox-api.brewerydb.com/v2/search?q=" + beerName + "&type=beer&key=01785c8a33163cdc3e7dbfc8f9c43f7e";
+    
+        axios.get(query)
+            .then(res => {
+                let data = res.data.data[0] ? res.data.data[0] : false;
+
+                if (data) {
+                    setBeerData(data);
+                    setBeerFound(true);
+                } else {
+                    setBeerFound(true);
+                }
+            })
+            .catch(err => {
+                setBeerFound(false);
+            });
+    }
+
+    function renderContent() {
+        if (beerFound) {
+            return (
+                <SearchBody />
+            );
+        } else {
+            alert("Beer Not Found");
+        }
+    }
+
+    return (
+        <Container>
+            <SearchHeader 
+                beerSearch={beerSearch}
+                onChangeText={(searchBeer) => setSearchBeer(searchBeer)} 
+                value={searchBeer} 
+            />
+            <Content>
+                {renderContent()}
+            </Content>
+        </Container>
     );
 }
 
@@ -14,9 +61,7 @@ SearchTab["navigationOptions"] = screenProps => ({
 });
 
 styles = StyleSheet.create({
-    container: {
 
-    }
 });
 
 export default SearchTab;

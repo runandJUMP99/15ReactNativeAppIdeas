@@ -32,6 +32,8 @@ import ToDo from "./components/ToDo/ToDo";
 const BeerFinder = createStackNavigator({
   Home: {screen: Home},
   Search: {screen: Search}
+}, {
+  initialRouteName: "Search"
 });
 
 export default createAppContainer(BeerFinder);
