@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Keyboard, StyleSheet, Text, View} from "react-native";
+import {Keyboard} from "react-native";
 import {Container, Content} from "native-base";
 import axios from "axios";
 
@@ -8,38 +8,25 @@ import SearchHeader from "../SearchHeader";
 
 const SearchTab = () => {
     const [searchBeer, setSearchBeer] = useState("");
-    const [beerData, setBeerData] = useState({});
-    const [beerFound, setBeerFound] = useState(false);
+    const [beer, setBeer] = useState(null);
 
     function beerSearch() {
         Keyboard.dismiss();
         const beerName = searchBeer.toLowerCase();
         const query = "https://sandbox-api.brewerydb.com/v2/search?q=" + beerName + "&type=beer&key=01785c8a33163cdc3e7dbfc8f9c43f7e";
-    
+
         axios.get(query)
             .then(res => {
-                let data = res.data.data[0] ? res.data.data[0] : false;
-
-                if (data) {
-                    setBeerData(data);
-                    setBeerFound(true);
-                } else {
-                    setBeerFound(true);
+                let beerData = res.data.data[0] ? res.data.data[0] : false;
+                
+                if (beerData) {
+                    setBeer(<SearchBody beerData={beerData} />);
                 }
             })
             .catch(err => {
-                setBeerFound(false);
+                setBeer(null);
+                alert("Beer Not Found");
             });
-    }
-
-    function renderContent() {
-        if (beerFound) {
-            return (
-                <SearchBody />
-            );
-        } else {
-            alert("Beer Not Found");
-        }
     }
 
     return (
@@ -50,7 +37,7 @@ const SearchTab = () => {
                 value={searchBeer} 
             />
             <Content>
-                {renderContent()}
+                {beer}
             </Content>
         </Container>
     );
@@ -58,10 +45,6 @@ const SearchTab = () => {
 
 SearchTab["navigationOptions"] = screenProps => ({
     headerShown: false
-});
-
-styles = StyleSheet.create({
-
 });
 
 export default SearchTab;

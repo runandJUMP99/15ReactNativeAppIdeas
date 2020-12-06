@@ -33,7 +33,7 @@ const BeerFinder = createStackNavigator({
   Home: {screen: Home},
   Search: {screen: Search}
 }, {
-  initialRouteName: "Search"
+  initialRouteName: "Home"
 });
 
 export default createAppContainer(BeerFinder);

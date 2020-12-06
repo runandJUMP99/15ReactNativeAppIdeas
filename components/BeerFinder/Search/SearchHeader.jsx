@@ -1,5 +1,4 @@
 import React from "react";
-import {StyleSheet, View} from "react-native";
 import {Header, Icon, Input, Item} from "native-base";
 
 const SearchHeader = (props) => {
@@ -17,11 +16,5 @@ const SearchHeader = (props) => {
         </Header>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-
-    }
-});
 
 export default SearchHeader;

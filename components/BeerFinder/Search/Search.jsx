@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleSheet, Text} from "react-native";
+import {Text} from "react-native";
 import {Button, Footer, FooterTab, Icon} from "native-base";
 import {createBottomTabNavigator} from "react-navigation-tabs";
 
@@ -26,12 +26,6 @@ const Search = createBottomTabNavigator({
                 </FooterTab>
             </Footer>
         );
-    }
-});
-
-const styles = StyleSheet.create({
-    container: {
-
     }
 });
 

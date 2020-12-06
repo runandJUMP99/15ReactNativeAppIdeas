@@ -1,12 +1,30 @@
 import React from "react";
-import {Button, StyleSheet, Text, View} from "react-native";
+import {Button, Image, Text, View} from "react-native";
 import {Content, List, ListItem} from "native-base";
+import * as firebase from "firebase";
 
 const SearchBody = (props) => {
     const beerData = props.beerData;
+    let currentUser;
+
+    const addToFavorites = async(beerName) => {
+        //get current user
+        currentUser = await firebase.auth().currentUser;
+
+        //get a unique key
+        let databaseRef = await firebase.database().ref(currentUser.uid).child("favorites").push();
+
+        //update beerName at unique key
+        databaseRef.set({
+            name: beerName
+        });
+    }
 
     return (
         <Content>
+            <ListItem itemDivider style={{flexDirection: "row", justifyContent: "center"}}>
+                <Image source={{uri: beerData.labels && beerData.labels.large}} style={{height: 200, width: 200}} />
+            </ListItem>
             <List style={{backgroundColor: "white"}}>
                 <ListItem itemDivider>
                     <Text>Name</Text>
@@ -16,7 +34,7 @@ const SearchBody = (props) => {
                         <Text>{beerData.name}</Text>
                     </View>
                     <View>
-                        <Button title="+ Favorites" />
+                        <Button onPress={() => addToFavorites(beerData.name)} title="+ Favorites" />
                     </View>
                 </ListItem>
                 <ListItem itemDivider>
@@ -47,17 +65,11 @@ const SearchBody = (props) => {
                     <Text>Availability</Text>
                 </ListItem>
                 <ListItem>
-                    <Text>{beerData.available.description ? beerData.available.description : "No Info"}</Text>
+                    <Text>{beerData.available && (beerData.available.description ? beerData.available.description : "No Info")}</Text>
                 </ListItem>
             </List>
         </Content>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-
-    }
-});
 
 export default SearchBody;

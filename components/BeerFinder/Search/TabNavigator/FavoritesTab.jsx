@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleSheet, Text, View} from "react-native";
+import {Text, View} from "react-native";
 
 const FavoritesTab = () => {
     return (
@@ -8,11 +8,5 @@ const FavoritesTab = () => {
         </View>
     );
 }
-
-styles = StyleSheet.create({
-    container: {
-
-    }
-});
 
 export default FavoritesTab;
