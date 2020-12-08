@@ -1,23 +1,23 @@
 import React from "react";
 import {Button, Image, Text, View} from "react-native";
 import {Content, List, ListItem} from "native-base";
-import * as firebase from "firebase";
+// import * as firebase from "firebase";
 
 const SearchBody = (props) => {
     const beerData = props.beerData;
     let currentUser;
 
     const addToFavorites = async(beerName) => {
-        //get current user
-        currentUser = await firebase.auth().currentUser;
+        // //get current user
+        // currentUser = await firebase.auth().currentUser;
 
-        //get a unique key
-        let databaseRef = await firebase.database().ref(currentUser.uid).child("favorites").push();
+        // //get a unique key
+        // let databaseRef = await firebase.database().ref(currentUser.uid).child("favorites").push();
 
-        //update beerName at unique key
-        databaseRef.set({
-            name: beerName
-        });
+        // //update beerName at unique key
+        // databaseRef.set({
+        //     name: beerName
+        // });
     }
 
     return (

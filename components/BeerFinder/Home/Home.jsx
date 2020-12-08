@@ -1,13 +1,13 @@
 import React, {useEffect} from "react";
 import {Image, StyleSheet, Text, View} from "react-native";
 import {Button} from "native-base"
-import * as firebase from "firebase";
+// import * as firebase from "firebase";
 
 
 const Home = (props) => {
-    useEffect(() => {
-        firebase.auth().signInWithEmailAndPassword("stevendvelez9@gmail.com", "password");
-    }, []);
+    // useEffect(() => {
+    //     firebase.auth().signInWithEmailAndPassword("stevendvelez9@gmail.com", "password");
+    // }, []);
 
     return (
         <View style={styles.container}>
