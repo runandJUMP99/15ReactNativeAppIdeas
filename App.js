@@ -4,14 +4,14 @@ import { StyleSheet, View } from 'react-native';
 import {createAppContainer} from "react-navigation";
 import {createStackNavigator} from "react-navigation-stack";
 
-import ChatScreen from "./components/ChatApp/screens/ChatScreen";
-import LoginScreen from "./components/ChatApp/screens/LoginScreen";
+// import ChatScreen from "./components/ChatApp/screens/ChatScreen";
+// import LoginScreen from "./components/ChatApp/screens/LoginScreen";
 import Home from "./components/BeerFinder/Home/Home";
-import ImageGallery from "./components/ImageGallery/ImageGallery";
-import Login from "./components/Login/Login";
-import MovieApp from "./components/MovieApp/MovieApp";
+// import ImageGallery from "./components/ImageGallery/ImageGallery";
+// import Login from "./components/Login/Login";
+// import MovieApp from "./components/MovieApp/MovieApp";
 import Search from "./components/BeerFinder//Search/Search";
-import ToDo from "./components/ToDo/ToDo";
+// import ToDo from "./components/ToDo/ToDo";
 
 // export default function App() {
 //   return (
@@ -31,20 +31,20 @@ import ToDo from "./components/ToDo/ToDo";
 //   }
 // });
 
-// const BeerFinder = createStackNavigator({
-//   Home: {screen: Home},
-//   Search: {screen: Search}
-// }, {
-//   initialRouteName: "Home"
-// });
-
-// export default createAppContainer(BeerFinder);
-
-const ChatApp = createStackNavigator({
-  Login: LoginScreen,
-  Chat: ChatScreen
+const BeerFinder = createStackNavigator({
+  Home: {screen: Home},
+  Search: {screen: Search}
 }, {
-  headerMode: "none"
+  initialRouteName: "Home"
 });
 
-export default createAppContainer(ChatApp);
+export default createAppContainer(BeerFinder);
+
+// const ChatApp = createStackNavigator({
+//   Login: LoginScreen,
+//   Chat: ChatScreen
+// }, {
+//   headerMode: "none"
+// });
+
+// export default createAppContainer(ChatApp);
